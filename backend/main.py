@@ -48,7 +48,7 @@ async def generate_subtitled_video(
                 "-m", "/app/whisper_model/ggml-tiny.bin",
                 "-f", audio_path,
                 "-otxt"
-            ], check=True, cwd="/app/whisper.cpp", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)            
 
             # Read transcription
             txt_file = "/app/whisper.cpp/audio.wav.txt"
