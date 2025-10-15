@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: subtitle-generator-backend
+    env: docker
+    plan: free
+    buildCommand: echo "No build needed"
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    disk: 1024 # 1 GB persistent disk for model cache
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    rootDir: backend # ← This tells Render to treat 'backend/' as the app root
