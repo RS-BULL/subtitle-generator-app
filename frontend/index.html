@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto Subtitle Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f9f9f9;
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .form-group {
+        margin: 20px 0;
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: bold;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 8px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        font-size: 18px;
+        background: #4a6cf7;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #3a5bf5;
+      }
+
+      .color-preview {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #ddd;
+        margin-left: 10px;
+        vertical-align: middle;
+        border-radius: 4px;
+      }
+      .color-input-container {
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Auto Subtitle Generator</h1>
+
+    <div class="form-group">
+      <label for="videoUpload">1. Upload Short/Reel (under 1 min)</label>
+      <input type="file" id="videoUpload" accept="video/*" required />
+    </div>
+
+    <div class="form-group">
+      <label for="fontSelect">2. Font</label>
+      <select id="fontSelect">
+        <option value="Arial">Arial</option>
+        <option value="Impact">Impact</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Courier New">Courier New</option>
+        <option value="Comic Sans MS">Comic Sans MS</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="textColor">3. Text Color</label>
+      <div class="color-input-container">
+        <input
+          type="color"
+          id="textColor"
+          value="#ffffff"
+          onchange="updatePreview('textColor', 'textPreview')"
+        />
+        <div
+          class="color-preview"
+          id="textPreview"
+          style="background: #ffffff"
+        ></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="outlineColor">4. Outline Color</label>
+      <div class="color-input-container">
+        <input
+          type="color"
+          id="outlineColor"
+          value="#000000"
+          onchange="updatePreview('outlineColor', 'outlinePreview')"
+        />
+        <div
+          class="color-preview"
+          id="outlinePreview"
+          style="background: #000000"
+        ></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="wordsPerLine">5. Words Per Line (e.g., 3–6)</label>
+      <input type="number" id="wordsPerLine" min="1" max="10" value="4" />
+    </div>
+
+    <button id="generateBtn">Generate Subtitled Video</button>
+
+    <div id="result"></div>
+
+    <script>
+      function updatePreview(inputId, previewId) {
+        const color = document.getElementById(inputId).value;
+        document.getElementById(previewId).style.backgroundColor = color;
+      }
+
+      document.getElementById("generateBtn").addEventListener("click", () => {
+        alert("Backend not connected yet. We’ll link this next!");
+      });
+    </script>
+  </body>
+</html>
