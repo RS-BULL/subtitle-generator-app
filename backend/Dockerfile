@@ -7,23 +7,26 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     git \
     ffmpeg \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 
 # Clone and build whisper.cpp
 RUN git clone https://github.com/ggerganov/whisper.cpp.git
 WORKDIR /app/whisper.cpp
-RUN make -j && make tiny
+RUN make -j
 
-# Copy your tiny model (from your local machine)
-COPY whisper_model/ggml-tiny.bin /app/whisper_model/
+# Download ggml-tiny.bin directly from Hugging Face (75 MB)
+RUN wget https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin -O /app/whisper_model/ggml-tiny.bin
 
-# Install Python
+# Install Python deps
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app code
+# Copy app code (no need to include model in Git)
 COPY . .
 
-# Expose port (Render uses 10000)
+# Ensure whisper_model dir exists
+RUN mkdir -p /app/whisper_model
+
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "10000"]
