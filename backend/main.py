@@ -35,8 +35,10 @@ async def generate_subtitled_video(
             # Extract audio → 16kHz mono WAV
             audio_path = os.path.join(tmp, "audio.wav")
             subprocess.run([
-                "ffmpeg", "-i", video_path,
-                "-ar", "16000", "-ac", "1", "-y", audio_path
+                "/app/whisper.cpp-main",
+                "-m", "/app/whisper_model/ggml-tiny.bin",
+                "-f", audio_path,
+                "-otxt"
             ], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
             # Run whisper.cpp (tiny model)
