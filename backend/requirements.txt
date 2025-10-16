@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+python-multipart
+transformers
+torch
+ffmpeg-python
+librosa
+numpy
